@@ -8,7 +8,7 @@ Run the application on http server which queries status of specified urls and th
 
 ## Design
 
-This application is written in Python using [Flask](https://flask.palletsprojects.com/en/1.1.x/) framework. The application can be accessed at ```<application-url>/queryurl``` and the metrics can be accessed at  ```<application-url>/metrics```. A docker image is built to run the application as container, the project also includes deployment scripts to run the application on Kubernetes.
+This application is written in Python using [Flask](https://flask.palletsprojects.com/en/1.1.x/) framework. The application can be accessed at ```<application-url>/queryurl``` and the metrics can be accessed at  ```<application-url>/metrics```. A docker image is built to run the application as container, the project also includes deployment scripts to run the application on Kubernetes. As part of design, I have considered to have a timeout of 30s which is part of external configuration and can be adjusted as needed.
   
 ### Unit Tests
 Unit Tests are written in file ``` python-prometheus/unit_tests.py ```. With http server running, execute this file to run unit tests.
@@ -72,6 +72,7 @@ If Prometheus is hosted on the same kubernestes as this application then we can 
 ## Application Usage
 The application can be accessed at ```<application-url>/queryurl``` and the metrics can be accessed at ```<application-url>/metrics``` .
   
+A sample of /queryurl and /metrics can be seen here:
 
 
 
