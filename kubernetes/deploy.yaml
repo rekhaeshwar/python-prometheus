@@ -3,7 +3,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  creationTimestamp: null
   labels:
     run: query-url
   name: query-url
@@ -13,17 +12,14 @@ spec:
   selector:
     matchLabels:
       run: query-url
-  strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         run: query-url
     spec:
       containers:
       - image: docker.pkg.github.com/rekhaeshwar/python-prometheus/query-url:0.0.1
         name: query-url
-        resources: {}
         resources:
           requests:
             memory: "100Mi"
