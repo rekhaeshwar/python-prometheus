@@ -44,3 +44,7 @@ Above deploy scripts creates:
 - Deployment called query-url. This uses the configmap and secret that are created above. configmap is mounted as a volume. It also contains readinessProbe to check the container health before it is ready to requests.
 - Service called query-url-service which exposes query-url deployment at port 32000 on Node and at 8080 inside the cluster.
 
+When the deployment is complete the resources on k8s cluster should look something like this:
+
+<img src="images/k8s_resources.PNG" >
+
