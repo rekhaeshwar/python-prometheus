@@ -3,9 +3,11 @@
 This project runs an application which queries status of specified urls and is written in Python using Flask.
 
 ##Requirements
+
 Run the application on http server which queries status of specified urls and these metrics are output to /metrics
 
 ##Build
+
 Please make sure docker is installed for below steps to work.
 
 Steps for docker build.
@@ -20,6 +22,7 @@ $ docker push docker.pkg.github.com/<username>/<project-name>/query-url:<VERSION
 Please replace username, project-name, IMAGE_ID and VERSION with appropriate values.
 
 ##Deploy
+
 This application can be hosted on kubernetes. 
 
 These softwares need to be installed on the host for deploying the application.
