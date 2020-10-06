@@ -9,7 +9,7 @@ metadata:
   name: query-url
   namespace: query-url
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       run: query-url
@@ -42,7 +42,7 @@ spec:
           periodSeconds: 30
           timeoutSeconds: 10
       imagePullSecrets:
-      - name: query-url-config
+      - name: git-reg-cred
       volumes:
       - name: query-url-config
         configMap:
