@@ -23,6 +23,8 @@ spec:
       containers:
       - image: docker.pkg.github.com/rekhaeshwar/python-prometheus/query-url:0.0.1
         name: query-url
+        imagePullSecrets:
+        - name: git-reg-cred
         resources: {}
         resources:
           requests:
