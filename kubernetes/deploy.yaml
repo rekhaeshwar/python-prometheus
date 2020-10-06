@@ -14,11 +14,14 @@ spec:
       run: query-url
   template:
     metadata:
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
       labels:
         run: query-url
     spec:
       containers:
-      - image: docker.pkg.github.com/rekhaeshwar/python-prometheus/query-url:0.0.1
+      - image: docker.pkg.github.com/rekhaeshwar/python-prometheus/query-url:0.0.2
         name: query-url
         resources:
           requests:
@@ -35,7 +38,7 @@ spec:
             path: /healthcheck
             port: 8080
           initialDelaySeconds: 5
-          periodSeconds: 30
+          periodSeconds: 10
           timeoutSeconds: 10
       imagePullSecrets:
       - name: git-reg-cred
