@@ -14,14 +14,24 @@ metrics['status']=Gauge('sample_external_url_up', 'Status of the url',['url'])
 
 REQUEST_TIMEOUT_SECONDS=cfg.request_timeout_in_seconds
 
+def construct_url_response(url,status_code,status_up,response_time_in_ms):
+    logging.info("constructing response per url" )
+    response_hash={}
+    response_hash['status_code']=status_code
+    response_hash['up']=status_up
+    response_hash['response_time_in_ms']=response_time_in_ms
+    metrics['status'].labels(url).set(status_up)
+    metrics['response_time'].labels(url).set(response_time_in_ms)
+    return response_hash
+
 @app.route('/queryurl')
 def checkurl():
     logging.info("Query url function.")
+
     ## reading config from config/config.py
     urls=cfg.urls
-    response_hash={}
-    response_hash['status']='ok'
-    response_hash['response']={}
+    result={}
+    result['response']={}
     for url in urls:
         try:
             logging.info("Querying url "+ url )
@@ -29,35 +39,20 @@ def checkurl():
             response_time_in_ms=response.elapsed.total_seconds()*1000
             if response.ok:
                 logging.info( url + " url responded successfully.")
-                response_hash['response'][url]={}
-                response_hash['response'][url]['status_code']=response.status_code
-                response_hash['response'][url]['up']=1
-                response_hash['response'][url]['response_time_in_ms']=response_time_in_ms
-                metrics['status'].labels(url).set(1)
-                metrics['response_time'].labels(url).set(response_time_in_ms)
+                result['response'][url]=construct_url_response(url,response.status_code,1,response_time_in_ms)
             else:
                 logging.info( url + " responded with unhealthy response code.")
-                response_hash['response'][url]={}
-                response_hash['response'][url]['status_code']=response.status_code
-                response_hash['response'][url]['up']=0
-                response_hash['response'][url]['response_time_in_ms']=response_time_in_ms
-                metrics['status'].labels(url).set(0)
-                metrics['response_time'].labels(url).set(response_time_in_ms)
+                result['response'][url]=construct_url_response(url,response.status_code,0,response_time_in_ms)
         except requests.Timeout as ex:
             logging.warning("Request timedout after " + str(REQUEST_TIMEOUT_SECONDS)+" seconds!")
             response_time_in_ms=REQUEST_TIMEOUT_SECONDS*1000
-            response_hash['response'][url]={}
-            response_hash['response'][url]['status_code']=503
-            response_hash['response'][url]['up']=0
-            response_hash['response'][url]['response_time_in_ms']=response_time_in_ms
-            metrics['status'].labels(url).set(0)
-            metrics['response_time'].labels(url).set(response_time_in_ms)
+            result['response'][url]=construct_url_response(url,503,0,response_time_in_ms)
         except Exception as ex:
             logging.warning("Something went wrong!")
             logging.warning(ex)
-
-    response_json=json.dumps(response_hash)
-    return json.loads(response_json)
+            result['response'][url]={"message":"Exception occured"}
+    result['status']='ok'
+    return json.dumps(result)
 
 @app.route("/metrics")
 def requests_count():

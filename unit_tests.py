@@ -22,9 +22,11 @@ class QueryUrlUnitTests(unittest.TestCase):
         self.assertEqual(r.status_code, 200)
         self.assertTrue(r.json()['response'])
         for url in r.json()['response']:
-            self.assertIn("status_code",r.json()['response'][url])
-            self.assertIn("up",r.json()['response'][url])
-            self.assertIn("response_time_in_ms",r.json()['response'][url])
+            if "message" not in r.json()['response'][url]:
+
+                self.assertIn("status_code",r.json()['response'][url])
+                self.assertIn("up",r.json()['response'][url])
+                self.assertIn("response_time_in_ms",r.json()['response'][url])
 
 if __name__ == "__main__":
     unittest.main()
