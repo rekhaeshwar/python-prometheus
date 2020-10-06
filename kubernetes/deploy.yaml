@@ -23,8 +23,6 @@ spec:
       containers:
       - image: docker.pkg.github.com/rekhaeshwar/python-prometheus/query-url:0.0.1
         name: query-url
-        imagePullSecrets:
-        - name: git-reg-cred
         resources: {}
         resources:
           requests:
@@ -43,6 +41,8 @@ spec:
           initialDelaySeconds: 5
           periodSeconds: 30
           timeoutSeconds: 10
+      imagePullSecrets:
+      - name: query-url-config
       volumes:
       - name: query-url-config
         configMap:
