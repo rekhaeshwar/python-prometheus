@@ -15,7 +15,6 @@
 - [Application Usage](#application-usage)
 - [Screenshot of Prometheus](#screenshot-of-metrics-on-prometheus)
 - [Screenshot of Grafana](#screenshot-of-metrics-on-grafana)
-- [Enhancements](#enhancements)
 <!-- TOC END -->
 
 This project runs an application which queries status of specified urls and is written in Python.
@@ -222,4 +221,3 @@ sample_external_url_up{url="https://httpstat.us/200"} 1.0
 
 ## Screenshot of metrics on Grafana
 
-## Enhancements
