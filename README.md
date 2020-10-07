@@ -29,12 +29,9 @@ Run the application on http server which queries status of specified urls and th
 This application is written in Python using [Flask](https://flask.palletsprojects.com/en/1.1.x/) framework. The application can be accessed at ```<application-url>/queryurl``` and the metrics can be accessed at  ```<application-url>/metrics```. A docker image is built to run the application as container, the project also includes deployment scripts to run the application on Kubernetes. As part of design, I have considered to have a timeout of 30s which is part of external configuration and can be adjusted as needed. The application has a background job which can be set to run at desired interval to query the urls periodically.
   
 ### Application Endpoints
- - /healthcheck
-   This is to monitor health of the application and that the application can serve requests
- - /queryurl
-   This is the main part of the application which queries for specified urls and responds with a JSON object contaning the result. This also adds the result to [Prometheus client](https://github.com/prometheus/client_python)
- - /metrics
-   This sends the metrics on prometheus client to Prometheus server
+ - /healthcheck -   This is to monitor health of the application and that the application can serve requests
+ - /queryurl -    This is the main part of the application which queries for specified urls and responds with a JSON object contaning the result. This also adds the result to [Prometheus client](https://github.com/prometheus/client_python)
+ - /metrics -    This sends the metrics on prometheus client to Prometheus server
    
 ### Scheduled Job
   Applications utilizes BackgroundScheduler from [apscheduler](https://apscheduler.readthedocs.io/en/stable/userguide.html) to periodically run the query-url functionality at spefied interval.
