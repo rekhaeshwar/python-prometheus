@@ -8,6 +8,5 @@ data:
     log_level="INFO"
 kind: ConfigMap
 metadata:
-  creationTimestamp: null
   name: query-url-config
   namespace: query-url
