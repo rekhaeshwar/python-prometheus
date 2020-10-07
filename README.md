@@ -204,10 +204,19 @@ So Prometheus(that's setup on the same k8s cluster) will start scraping metrics 
 ## Application Usage
 The application can be accessed at ```<application-url>/queryurl``` and the metrics can be accessed at ```<application-url>/metrics``` .
   
-A sample of /queryurl and /metrics can be seen here:
+A sample of /metrics can be seen here:
 
-<img src="images/metrics.png" height="250">
-<img src="images/queryurl.png" height="250">
+```bash
+$ curl http://10.110.232.152:32000/metrics
+# HELP sample_external_url_response_ms Response Time of the url
+# TYPE sample_external_url_response_ms gauge
+sample_external_url_response_ms{url="https://httpstat.us/503"} 2522.0440000000003
+sample_external_url_response_ms{url="https://httpstat.us/200"} 1868.4289999999999
+# HELP sample_external_url_up Status of the url
+# TYPE sample_external_url_up gauge
+sample_external_url_up{url="https://httpstat.us/503"} 0.0
+sample_external_url_up{url="https://httpstat.us/200"} 1.0
+```
 
 ## Screenshot of metrics on Prometheus
 
