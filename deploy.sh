@@ -1,6 +1,9 @@
 #!/bin/bash
 
-#creates namespace, configmap and secret with docker registry credentails
+#creates namespace and secret with docker registry credentails
+kubectl apply -f kubernetes/utils.yaml
+
+#creates configmap for external configs
 kubectl apply -f kubernetes/configmap.yaml
 
 #creates deployment
