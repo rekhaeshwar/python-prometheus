@@ -15,6 +15,7 @@
 - [Application Usage](#application-usage)
 - [Screenshot of Prometheus](#screenshot-of-metrics-on-prometheus)
 - [Screenshot of Grafana](#screenshot-of-metrics-on-grafana)
+- [Enhancements](#enhancements)
 <!-- TOC END -->
 
 This project runs an application which queries status of specified urls and is written in Python.
@@ -194,6 +195,8 @@ A sample of /queryurl and /metrics can be seen here:
 <img src="images/metrics.png" height="250">
 <img src="images/queryurl.png" height="250">
 
-## Screenshot of metrics on Prometheus:
+## Screenshot of metrics on Prometheus
 
-## Screenshot of metrics on Grafana:
+## Screenshot of metrics on Grafana
+
+## Enhancements
