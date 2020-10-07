@@ -23,6 +23,7 @@ spec:
       containers:
       - image: docker.pkg.github.com/rekhaeshwar/python-prometheus/query-url:0.0.2
         name: query-url
+        imagePullPolicy: Always
         resources:
           requests:
             memory: "100Mi"
