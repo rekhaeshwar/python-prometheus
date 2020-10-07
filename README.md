@@ -1,5 +1,9 @@
 # python-prometheus
 
+<!-- TOC START min:3 max:5 link:true update:true -->
+- [Requirements](#Requirements)
+<!-- TOC END -->
+
 This project runs an application which queries status of specified urls and is written in Python.
 
 ## Requirements
