@@ -3,10 +3,10 @@
 <!-- TOC START min:3 max:5 link:true update:true -->
 - [Requirements](#requirements)
 - [Design](#design)
- - [Unit Tests](##unit-tests)
+ - [Unit Tests](#unit-tests)
 - [Build](#build)
 - [Deploy](#deploy)
-  - [External Configs](##external-configs)
+  - [External Configs](#external-configs)
 - [Application Usage](#application-usage)
 <!-- TOC END -->
 
