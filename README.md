@@ -34,7 +34,7 @@ This application is written in Python using [Flask](https://flask.palletsproject
  - /metrics -    This endpoint replies with a reponse object conatining the metrics tracked by prometheus client library. Prometheus server scrapes this endpoint to receive latest metrics.
    
 ### Scheduled Job
-  Applications utilizes BackgroundScheduler from [apscheduler](https://apscheduler.readthedocs.io/en/stable/userguide.html) to periodically run the query-url functionality at spefied interval.
+  This application utilizes BackgroundScheduler from [apscheduler](https://apscheduler.readthedocs.io/en/stable/userguide.html) to periodically run the query-url functionality at spefied interval.
    
 ### Unit Tests
 Unit Tests are written in file ``` python-prometheus/unit_tests.py ```. With http server running, execute this file to run unit tests.
