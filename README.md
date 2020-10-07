@@ -172,6 +172,8 @@ The application can be accessed at ```<application-url>/queryurl``` and the metr
   
 A sample of /queryurl and /metrics can be seen here:
 
+<img src="images/metrics.png" height="250">
+<img src="images/queryurl.png" height="250">
 
 Screenshot of metrics on Prometheus:
 
