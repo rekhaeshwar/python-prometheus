@@ -7,7 +7,11 @@
 - [Build](#build)
 - [Deploy](#deploy)
    - [External Configs](#external-configs)
+   - [Steps](#steps-to-deploy)
+   - [Adding to Prometheus](#adding-the-application-endpoints-to-Prometheus)
 - [Application Usage](#application-usage)
+-[Screenshot of Prometheus](#screenshot-of-metrics-on-prometheus)
+-[Screenshot of Grafana](#screenshot-of-metrics-on-grafana)
 <!-- TOC END -->
 
 This project runs an application which queries status of specified urls and is written in Python.
@@ -158,7 +162,7 @@ When the deployment is complete the resources on k8s cluster should look somethi
 <img src="images/k8s_resources.PNG" height="250">
 
 ### Adding the application endpoints to Prometheus
-The pods running the application are deployed with below annotations.
+The pods running the application contain below annotations.
 
 ```bash
   annotations:
@@ -175,6 +179,6 @@ A sample of /queryurl and /metrics can be seen here:
 <img src="images/metrics.png" height="250">
 <img src="images/queryurl.png" height="250">
 
-Screenshot of metrics on Prometheus:
+## Screenshot of metrics on Prometheus:
 
-Screenshot of metrics on Grafana:
+## Screenshot of metrics on Grafana:
