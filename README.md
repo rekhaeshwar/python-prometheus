@@ -10,8 +10,8 @@
    - [Steps](#steps-to-deploy)
    - [Adding to Prometheus](#adding-the-application-endpoints-to-Prometheus)
 - [Application Usage](#application-usage)
--[Screenshot of Prometheus](#screenshot-of-metrics-on-prometheus)
--[Screenshot of Grafana](#screenshot-of-metrics-on-grafana)
+- [Screenshot of Prometheus](#screenshot-of-metrics-on-prometheus)
+- [Screenshot of Grafana](#screenshot-of-metrics-on-grafana)
 <!-- TOC END -->
 
 This project runs an application which queries status of specified urls and is written in Python.
