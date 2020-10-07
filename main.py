@@ -28,9 +28,12 @@ def construct_url_response(url,status_code,status_up,response_time_in_ms):
     response_hash['status_code']=status_code
     response_hash['up']=status_up
     response_hash['response_time_in_ms']=response_time_in_ms
+    return response_hash
+
+def add_metrics(url,status_up,response_time_in_ms):
     metrics['status'].labels(url).set(status_up)
     metrics['response_time'].labels(url).set(response_time_in_ms)
-    return response_hash
+    return
 
 # endpoint to run url query
 @app.route('/queryurl')
@@ -40,7 +43,8 @@ def checkurl():
     # reading config from config/config.py
     urls=cfg.urls
     result={}
-    result['response']={}
+    # uncomment below line to add status to response
+    #result['response']={}
     for url in urls:
         try:
             logging.info("Querying url "+ url )
@@ -48,14 +52,20 @@ def checkurl():
             response_time_in_ms=response.elapsed.total_seconds()*1000
             if response.ok:
                 logging.info( url + " url responded successfully.")
-                result['response'][url]=construct_url_response(url,response.status_code,1,response_time_in_ms)
+                # uncomment below line to add url status to response
+                #result['response'][url]=construct_url_response(url,response.status_code,1,response_time_in_ms)
+                add_metrics(url,1,response_time_in_ms)
             else:
                 logging.info( url + " responded with unhealthy response code.")
-                result['response'][url]=construct_url_response(url,response.status_code,0,response_time_in_ms)
+                # uncomment below line to add url status to response
+                #result['response'][url]=construct_url_response(url,response.status_code,0,response_time_in_ms)
+                add_metrics(url,0,response_time_in_ms)
         except requests.Timeout as ex:
             logging.warning("Request timed out after " + str(REQUEST_TIMEOUT_SECONDS)+" seconds for url - "+ url)
             response_time_in_ms=REQUEST_TIMEOUT_SECONDS*1000
-            result['response'][url]=construct_url_response(url,503,0,response_time_in_ms)
+            # uncomment below line to add url status to response
+            #result['response'][url]=construct_url_response(url,503,0,response_time_in_ms)
+            add_metrics(url,1,response_time_in_ms)
         except Exception as ex:
             logging.warning("Something went wrong!")
             logging.exception(ex)
