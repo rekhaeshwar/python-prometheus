@@ -59,7 +59,7 @@ These softwares need to be installed on the host for deploying the application.
 
 ### External Configs
 
-This application takes the configurations from config/config.py
+This application takes the configurations from ``` config/config.py ```
 
 ```bash
 $ cat python-prometheus/config/config.py
@@ -103,7 +103,39 @@ Each configuration purpose and expected values are described below:
   </tr>
 </table>
 
-Steps to deploy
+A ConfigMap is created from file- ```config/config.py ``` and is mounted as a volume into the container. Creating this ConfigMap is automated as part of deploy script, hence if the configs need to be changed, below shown ``` kubernetes/configmap.yaml ``` can be updated as needed and then go ahead with deployment step mentioned below.
+
+```bash
+$ cat python-prometheus/kubernetes/configmap.yaml
+---
+apiVersion: v1
+data:
+  config.py: |
+    urls=["https://httpstat.us/503", "https://httpstat.us/200"]
+    request_timeout_in_seconds=30
+    query_interval_in_seconds=90
+    log_level="WARNING"
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: query-url-config
+  namespace: query-url
+```
+Note: If you prefer updating ```config/config.py ``` than ``` kubernetes/configmap.yaml ```, then please follow below steps:
+
+```bash
+$ ls
+config  deploy.sh  Dockerfile  images  kubernetes  main.py  README.md  requirements.txt  unit_tests.py
+$  kubectl get namespace  query-url
+NAME        STATUS   AGE
+query-url   Active   2m29s
+$ kubectl delete configmap query-url-config -n  query-url
+configmap "query-url-config" deleted
+$ kubectl create configmap query-url-config --from-file=config/ -n query-url
+configmap/query-url-config created
+```
+
+## Steps to deploy
 ```bash
 $ cd python-prometheus/
 $ sh deploy.sh 
