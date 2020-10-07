@@ -172,11 +172,24 @@ Above deploy scripts creates:
 - ConfigMap called query-url-config. This contains the queries that the application queries. In case we need to add more urls, we can update the configmap and restart deployment.
 - Secret called git-reg-cred which had READ packages token to download docker image from Github.
 - Deployment called query-url. This uses the configmap and secret that are created above. configmap is mounted as a volume. It also contains readinessProbe to check the container health before it is ready to requests.
-- Service called query-url-service which exposes query-url deployment at port 32000 on Node and at 8080 inside the cluster.
+- Service called query-url-service which exposes query-url deployment at port 32000 with internal DNS url(Example: query-url-service.query-url.svc.cluster-domain.example) inside the cluster. Service creaion is not required if there is no need to expose the deployment and be removed by commenthing the line ``` kubectl apply -f kubernetes/service.yaml ``` from deploy.sh script.
 
 When the deployment is complete the resources on k8s cluster should look something like this:
 
-<img src="images/k8s_resources.PNG" height="250">
+```bash
+$ k get all  -n query-url
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/query-url-79bbf79cd-9t7s6   1/1     Running   0          100s
+
+NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)     AGE
+service/query-url-service   ClusterIP   10.110.232.152   <none>        32000/TCP   15m
+
+NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/query-url   1/1     1            1           15m
+
+NAME                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/query-url-79bbf79cd    1         1         1       100s
+```
 
 ### Adding the application endpoints to Prometheus
 The pods running the application contain below annotations.
