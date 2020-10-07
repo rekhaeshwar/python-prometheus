@@ -75,25 +75,25 @@ Each configuration purpose and expected values are describe below:
     <th>Config Key</th>
     <th>Purpose</th>
     <th>Data type</th>
-    <th>["https://httpstat.us/503", "https://httpstat.us/200"] addidtional urls can be added as needed</th>
+    <th>Expected Value</th>
   </tr>
   <tr>
     <td>urls</td>
     <td>All the urls to be queried</td>
     <td>List(containing urls)</td>
-    <td>30 or as per need</td>
+    <td>["https://httpstat.us/503", "https://httpstat.us/200"] (addidtional urls can be added as needed)</td>
   </tr>
   <tr>
     <td>request_timeout_in_seconds</td>
     <td>This config is to time out requesting an url after the mentioned seconds</td>
     <td>Integer</td>
-    <td>300 or as per need</td>
+    <td>30(or as per need)</td>
   </tr>
  <tr>
     <td>query_interval_in_seconds</td>
     <td>This config is to periodically run the function which querying urls after the mentioned seconds</td>
     <td>Integer</td>
-    <td></td>
+    <td>300(or as per need)</td>
   </tr>
  <tr>
     <td>log_level</td>
