@@ -64,10 +64,15 @@ When the deployment is complete the resources on k8s cluster should look somethi
 
 <img src="images/k8s_resources.PNG" height="250">
 
-### Adding the application endpoint to Prometheus
-To add the application endpoint to Prometheus so it can scrape the application metriccs, we need to add application metrics endpoint to Prometheus config file. 
+### Adding the application endpoints to Prometheus
+The pods running the application are deployed with below annaotations.
 
-If Prometheus is hosted on the same kubernestes as this application then we can use the 
+```bash
+  annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+```
+So Prometheus(that's setup on the same k8s cluster) will start scraping metrics when the pods are created.
 
 ## Application Usage
 The application can be accessed at ```<application-url>/queryurl``` and the metrics can be accessed at ```<application-url>/metrics``` .
@@ -75,4 +80,6 @@ The application can be accessed at ```<application-url>/queryurl``` and the metr
 A sample of /queryurl and /metrics can be seen here:
 
 
+Screenshot of metrics on Prometheus:
 
+Screenshot of metrics on Grafana:
