@@ -3,8 +3,11 @@
 <!-- TOC START min:3 max:5 link:true update:true -->
 - [Requirements](#requirements)
 - [Design](#design)
- - [Unit Tests](#unit-tests)
+ - [Unit Tests](##unit-tests)
 - [Build](#build)
+- [Deploy](#deploy)
+  - [External Configs](##external-configs)
+- [Application Usage](#application-usage)
 <!-- TOC END -->
 
 This project runs an application which queries status of specified urls and is written in Python.
@@ -15,7 +18,7 @@ Run the application on http server which queries status of specified urls and th
 
 ## Design
 
-This application is written in Python using [Flask](https://flask.palletsprojects.com/en/1.1.x/) framework. The application can be accessed at ```<application-url>/queryurl``` and the metrics can be accessed at  ```<application-url>/metrics```. A docker image is built to run the application as container, the project also includes deployment scripts to run the application on Kubernetes. As part of design, I have considered to have a timeout of 30s which is part of external configuration and can be adjusted as needed.
+This application is written in Python using [Flask](https://flask.palletsprojects.com/en/1.1.x/) framework. The application can be accessed at ```<application-url>/queryurl``` and the metrics can be accessed at  ```<application-url>/metrics```. A docker image is built to run the application as container, the project also includes deployment scripts to run the application on Kubernetes. As part of design, I have considered to have a timeout of 30s which is part of external configuration and can be adjusted as needed. The application has a background job which can be set to run at desired interval to query the urls periodically.
   
 ### Unit Tests
 Unit Tests are written in file ``` python-prometheus/unit_tests.py ```. With http server running, execute this file to run unit tests.
@@ -53,6 +56,52 @@ These softwares need to be installed on the host for deploying the application.
 - [kubernetes](https://kubernetes.io/)
 - [Prometheus](https://prometheus.io/)
 - [Grafana](https://grafana.com/)
+
+### External Configs
+
+This application takes the configurations from config/config.py
+
+```bash
+$ cat python-prometheus/config/config.py
+urls=["https://httpstat.us/503", "https://httpstat.us/200"]
+request_timeout_in_seconds=30
+query_interval_in_seconds=300
+log_level="INFO"
+```
+Each configuration purpose and expected values are describe below:
+
+<table>
+  <tr>
+    <th>Config Key</th>
+    <th>Purpose</th>
+    <th>Data type</th>
+    <th>["https://httpstat.us/503", "https://httpstat.us/200"] addidtional urls can be added as needed</th>
+  </tr>
+  <tr>
+    <td>urls</td>
+    <td>All the urls to be queried</td>
+    <td>List(containing urls)</td>
+    <td>30 or as per need</td>
+  </tr>
+  <tr>
+    <td>request_timeout_in_seconds</td>
+    <td>This config is to time out requesting an url after the mentioned seconds</td>
+    <td>Integer</td>
+    <td>300 or as per need</td>
+  </tr>
+ <tr>
+    <td>query_interval_in_seconds</td>
+    <td>This config is to periodically run the function which querying urls after the mentioned seconds</td>
+    <td>Integer</td>
+    <td></td>
+  </tr>
+ <tr>
+    <td>log_level</td>
+    <td>To control log level</td>
+    <td>String</td>
+    <td>one of DEBUG, INFO, WARNING, ERROR, CRITICAL</td>
+  </tr>
+</table>
 
 Steps to deploy
 ```bash
