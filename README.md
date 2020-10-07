@@ -102,7 +102,7 @@ Each configuration purpose and expected values are described below:
   "https://httpstat.us/503" ,
   "https://httpstat.us/200"
  ] 
- (addidtional urls can be added as needed)</td>
+ (addidtional urls can be added as needed)</pre></td>
   </tr>
   <tr>
     <td>request_timeout_in_seconds</td>
