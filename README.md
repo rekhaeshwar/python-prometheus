@@ -68,7 +68,7 @@ request_timeout_in_seconds=30
 query_interval_in_seconds=300
 log_level="INFO"
 ```
-Each configuration purpose and expected values are describe below:
+Each configuration purpose and expected values are described below:
 
 <table>
   <tr>
@@ -121,7 +121,7 @@ When the deployment is complete the resources on k8s cluster should look somethi
 <img src="images/k8s_resources.PNG" height="250">
 
 ### Adding the application endpoints to Prometheus
-The pods running the application are deployed with below annaotations.
+The pods running the application are deployed with below annotations.
 
 ```bash
   annotations:
