@@ -3,12 +3,15 @@
 <!-- TOC START min:3 max:5 link:true update:true -->
 - [Requirements](#requirements)
 - [Design](#design)
+  - [Application Endpoints](#application-endpoints)
+  - [Scheduled Job](#scheduled-job)
   - [Unit Tests](#unit-tests)
 - [Build](#build)
 - [Deploy](#deploy)
+   - [Prerequisites](#prerequisites)
    - [External Configs](#external-configs)
    - [Steps](#steps-to-deploy)
-   - [Adding to Prometheus](#adding-the-application-endpoints-to-Prometheus)
+   - [Adding to Prometheus](#adding-the-application-endpoints-to-prometheus)
 - [Application Usage](#application-usage)
 - [Screenshot of Prometheus](#screenshot-of-metrics-on-prometheus)
 - [Screenshot of Grafana](#screenshot-of-metrics-on-grafana)
@@ -24,6 +27,17 @@ Run the application on http server which queries status of specified urls and th
 
 This application is written in Python using [Flask](https://flask.palletsprojects.com/en/1.1.x/) framework. The application can be accessed at ```<application-url>/queryurl``` and the metrics can be accessed at  ```<application-url>/metrics```. A docker image is built to run the application as container, the project also includes deployment scripts to run the application on Kubernetes. As part of design, I have considered to have a timeout of 30s which is part of external configuration and can be adjusted as needed. The application has a background job which can be set to run at desired interval to query the urls periodically.
   
+### Application Endpoints
+ - /healthcheck
+   This is to monitor health of the application and that the application can serve requests
+ - /queryurl
+   This is the main part of the application which queries for specified urls and responds with a JSON object contaning the result. This also adds the result to [Prometheus client](https://github.com/prometheus/client_python)
+ - /metrics
+   This sends the metrics on prometheus client to Prometheus server
+   
+### Scheduled Job
+  Applications utilizes BackgroundScheduler from [apscheduler](https://apscheduler.readthedocs.io/en/stable/userguide.html) to periodically run the query-url functionality at spefied interval.
+   
 ### Unit Tests
 Unit Tests are written in file ``` python-prometheus/unit_tests.py ```. With http server running, execute this file to run unit tests.
 
@@ -55,6 +69,7 @@ Please replace username, project-name, IMAGE_ID and VERSION with appropriate val
 
 This application can be hosted on kubernetes. 
 
+### Prerequisites
 These softwares need to be installed on the host for deploying the application.
 - [Docker](https://www.docker.com/)
 - [kubernetes](https://kubernetes.io/)
