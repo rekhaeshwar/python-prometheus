@@ -139,6 +139,11 @@ configmap/query-url-config created
 ```bash
 $ cd python-prometheus/
 $ sh deploy.sh 
+namespace/query-url created
+configmap/query-url-config created
+secret/git-reg-cred created
+deployment.apps/query-url created
+service/query-url-service created
 ```
 
 Above deploy scripts creates:
