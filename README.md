@@ -98,7 +98,7 @@ Each configuration purpose and expected values are described below:
     <td>urls</td>
     <td>All the urls to be queried</td>
     <td>List(containing urls)</td>
-    <td>["https://httpstat.us/503", "https://httpstat.us/200"] (addidtional urls can be added as needed)</td>
+    <td>["https://httpstat.us/503","https://httpstat.us/200"] (addidtional urls can be added as needed)</td>
   </tr>
   <tr>
     <td>request_timeout_in_seconds</td>
