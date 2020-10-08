@@ -15,7 +15,6 @@
 - [Application Usage](#application-usage)
 - [Screenshot of Prometheus](#screenshot-of-metrics-on-prometheus)
 - [Screenshot of Grafana](#screenshot-of-metrics-on-grafana)
-- [Enhancements](#enhancements)
 <!-- TOC END -->
 
 This project runs an application which queries status of specified urls and is written in Python.
@@ -172,11 +171,24 @@ Above deploy scripts creates:
 - ConfigMap called query-url-config. This contains the queries that the application queries. In case we need to add more urls, we can update the configmap and restart deployment.
 - Secret called git-reg-cred which had READ packages token to download docker image from Github.
 - Deployment called query-url. This uses the configmap and secret that are created above. configmap is mounted as a volume. It also contains readinessProbe to check the container health before it is ready to requests.
-- Service called query-url-service which exposes query-url deployment at port 32000 on Node and at 8080 inside the cluster.
+- Service called query-url-service which exposes query-url deployment at port 32000 with internal DNS url(Example: query-url-service.query-url.svc.cluster-domain.example) inside the cluster. Service creaion is not required if there is no need to expose the deployment and be removed by commenthing the line ``` kubectl apply -f kubernetes/service.yaml ``` from deploy.sh script.
 
 When the deployment is complete the resources on k8s cluster should look something like this:
 
-<img src="images/k8s_resources.PNG" height="250">
+```bash
+$ k get all  -n query-url
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/query-url-79bbf79cd-9t7s6   1/1     Running   0          100s
+
+NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)     AGE
+service/query-url-service   ClusterIP   10.110.232.152   <none>        32000/TCP   15m
+
+NAME                        READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/query-url   1/1     1            1           15m
+
+NAME                                   DESIRED   CURRENT   READY   AGE
+replicaset.apps/query-url-79bbf79cd    1         1         1       100s
+```
 
 ### Adding the application endpoints to Prometheus
 The pods running the application contain below annotations.
@@ -191,13 +203,21 @@ So Prometheus(that's setup on the same k8s cluster) will start scraping metrics 
 ## Application Usage
 The application can be accessed at ```<application-url>/queryurl``` and the metrics can be accessed at ```<application-url>/metrics``` .
   
-A sample of /queryurl and /metrics can be seen here:
+A sample of /metrics can be seen here:
 
-<img src="images/metrics.png" height="250">
-<img src="images/queryurl.png" height="250">
+```bash
+$ curl http://10.110.232.152:32000/metrics
+# HELP sample_external_url_response_ms Response Time of the url
+# TYPE sample_external_url_response_ms gauge
+sample_external_url_response_ms{url="https://httpstat.us/503"} 2522.0440000000003
+sample_external_url_response_ms{url="https://httpstat.us/200"} 1868.4289999999999
+# HELP sample_external_url_up Status of the url
+# TYPE sample_external_url_up gauge
+sample_external_url_up{url="https://httpstat.us/503"} 0.0
+sample_external_url_up{url="https://httpstat.us/200"} 1.0
+```
 
 ## Screenshot of metrics on Prometheus
 
 ## Screenshot of metrics on Grafana
 
-## Enhancements
