@@ -168,11 +168,11 @@ deployment is successfully rolled out
 ```
 
 Above deploy scripts creates:
-- New namespace called query-url on k8s cluster. All the resources are created inside this namespace( so it can be easier ti delete everything related to this application in one shot)
-- ConfigMap called query-url-config. This contains the queries that the application queries. In case we need to add more urls, we can update the configmap and restart deployment.
-- Secret called git-reg-cred which had READ packages token to download docker image from Github.
-- Deployment called query-url. This uses the configmap and secret that are created above. configmap is mounted as a volume. It also contains readinessProbe to check the container health before it is ready to requests.
-- Service called query-url-service which exposes query-url deployment at port 32000 with internal DNS url(Example: query-url-service.query-url.svc.cluster-domain.example) inside the cluster. Service creaion is not required if there is no need to expose the deployment and be removed by commenting the line ``` kubectl apply -f kubernetes/service.yaml ``` from deploy.sh script.
+- New namespace called query-url on k8s cluster. All the resources are created inside this namespace( so it can be easier to delete everything related to this application in one shot)
+- ConfigMap called query-url-config. This contains the external configs needed for the application. In case we need to add more urls, we can update the configmap and restart deployment.
+- Secret called git-reg-cred which has READ packages token to download docker image from Github.
+- Deployment called query-url. This uses the configmap and secret that are created above. Configmap is mounted as a volume into the container. It also contains readinessProbe to check the container health before it is ready to requests.
+- Service called query-url-service which exposes query-url deployment at port 32000 with k8s internal DNS url(Example: query-url-service.query-url.svc.cluster-domain.example) inside the cluster. Service creation is not required if there is no need to expose the deployment and be removed by commenting the line ``` kubectl apply -f kubernetes/service.yaml ``` from deploy.sh script.
 
 When the deployment is complete the resources on k8s cluster should look something like this:
 
@@ -201,7 +201,7 @@ The pods running the application contain below annotations.
 ```
 So Prometheus (that's setup on the same k8s cluster) will start scraping metrics when the pods are created.
 
-
+In case Prometheus does not scrape this pod for any reason, we can add the service url and port (query-url-service.query-url.svc.cluster.local:32000) as a static config in prometheus configmap. This may need a prometheus server restart.
 
 ## Application Usage
 The application can be accessed at ```<application-url>/queryurl``` and the metrics can be accessed at ```<application-url>/metrics``` .
