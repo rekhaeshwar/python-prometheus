@@ -17,11 +17,11 @@
 - [Screenshot of Grafana](#screenshot-of-metrics-on-grafana)
 <!-- TOC END -->
 
-This project is an application which queries status of specified urls..
+This project is an application which queries status of specified urls.
 
 ## Requirements
 
-Run the application on http server which queries status of specified urls and these metrics are output to /metrics endpoint
+Run the application on http server which queries status of specified urls and these metrics are output to /metrics endpoint.
 
 ## Design
 
