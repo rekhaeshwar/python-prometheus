@@ -164,6 +164,7 @@ configmap/query-url-config created
 secret/git-reg-cred created
 deployment.apps/query-url created
 service/query-url-service created
+deployment is successfully rolled out
 ```
 
 Above deploy scripts creates:
