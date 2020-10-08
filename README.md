@@ -141,7 +141,7 @@ metadata:
   name: query-url-config
   namespace: query-url
 ```
-Note: If you prefer updating ```config/config.py ``` than ``` kubernetes/configmap.yaml ```, then please follow below steps:
+Note: If you prefer updating ```config/config.py ``` to ``` kubernetes/configmap.yaml ```, then please follow below steps:
 
 ```bash
 $ ls
@@ -220,6 +220,8 @@ sample_external_url_up{url="https://httpstat.us/200"} 1.0
 ```
 
 ## Screenshot of metrics on Prometheus
+Queries used for both Prometheus and Grafana are ``` sum by (url) (sample_external_url_response_ms) ``` and ``` sum by (url) (sample_external_url_up)```
+
 <img src="images/prometheus_up.png" />
 <img src="images/prometheus_response.png" />
 ## Screenshot of metrics on Grafana
