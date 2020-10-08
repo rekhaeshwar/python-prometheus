@@ -30,7 +30,7 @@ This application is written in Python using [Flask](https://flask.palletsproject
 ### Application Endpoints
  - /healthcheck -   This is to monitor health of the application and that the application can serve requests.
  - /queryurl -    This is the main part of the application which queries for specified urls and responds with a JSON object as the result. This also adds the result to [Prometheus client ](https://github.com/prometheus/client_python) library objects.
- - /metrics -    This endpoint replies with a reponse object conatining the metrics tracked by prometheus client library. Prometheus server scrapes this endpoint to receive latest metrics.
+ - /metrics -    This endpoint replies with a response object conatining the metrics tracked by prometheus client library. Prometheus server scrapes this endpoint to receive latest metrics.
    
 ### Scheduled Job
   This application utilizes BackgroundScheduler from [apscheduler](https://apscheduler.readthedocs.io/en/stable/userguide.html) to periodically run the query-url functionality at spefied interval.
