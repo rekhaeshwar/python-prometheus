@@ -101,19 +101,19 @@ Each configuration purpose and expected values are described below:
   "https://httpstat.us/503" ,
   "https://httpstat.us/200"
  ] 
- (addidtional urls can be added as needed)</pre></td>
+ (additional urls can be added as needed)</pre></td>
   </tr>
   <tr>
     <td>request_timeout_in_seconds</td>
     <td>This config is to time out requesting an url after the mentioned seconds</td>
     <td>Integer</td>
-    <td>30(or as per need)</td>
+    <td>30 (or as per need)</td>
   </tr>
  <tr>
     <td>query_interval_in_seconds</td>
     <td>This config is to periodically run the function which querying urls after the mentioned seconds</td>
     <td>Integer</td>
-    <td>300(or as per need)</td>
+    <td>300 (or as per need)</td>
   </tr>
  <tr>
     <td>log_level</td>
@@ -172,7 +172,7 @@ Above deploy scripts creates:
 - ConfigMap called query-url-config. This contains the queries that the application queries. In case we need to add more urls, we can update the configmap and restart deployment.
 - Secret called git-reg-cred which had READ packages token to download docker image from Github.
 - Deployment called query-url. This uses the configmap and secret that are created above. configmap is mounted as a volume. It also contains readinessProbe to check the container health before it is ready to requests.
-- Service called query-url-service which exposes query-url deployment at port 32000 with internal DNS url(Example: query-url-service.query-url.svc.cluster-domain.example) inside the cluster. Service creaion is not required if there is no need to expose the deployment and be removed by commenthing the line ``` kubectl apply -f kubernetes/service.yaml ``` from deploy.sh script.
+- Service called query-url-service which exposes query-url deployment at port 32000 with internal DNS url(Example: query-url-service.query-url.svc.cluster-domain.example) inside the cluster. Service creaion is not required if there is no need to expose the deployment and be removed by commenting the line ``` kubectl apply -f kubernetes/service.yaml ``` from deploy.sh script.
 
 When the deployment is complete the resources on k8s cluster should look something like this:
 
@@ -199,7 +199,7 @@ The pods running the application contain below annotations.
         prometheus.io/scrape: "true"
         prometheus.io/port: "8080"
 ```
-So Prometheus(that's setup on the same k8s cluster) will start scraping metrics when the pods are created.
+So Prometheus (that's setup on the same k8s cluster) will start scraping metrics when the pods are created.
 
 
 
