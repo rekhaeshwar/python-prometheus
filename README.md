@@ -33,7 +33,7 @@ This application is written in Python using [Flask](https://flask.palletsproject
  - /metrics -    This endpoint replies with a response object conatining the metrics tracked by prometheus client library. Prometheus server scrapes this endpoint to receive latest metrics.
    
 ### Scheduled Job
-  This application utilizes BackgroundScheduler from [apscheduler](https://apscheduler.readthedocs.io/en/stable/userguide.html) to periodically run the query-url functionality at spefied interval.
+  This application utilizes BackgroundScheduler from [apscheduler](https://apscheduler.readthedocs.io/en/stable/userguide.html) to periodically run the query-url functionality at specified interval.
    
 ### Unit Tests
 Unit Tests are written in file ``` python-prometheus/unit_tests.py ```. With http server running, execute this file to run unit tests.
@@ -49,7 +49,7 @@ OK
 
 ## Build
 
-Please make sure docker is installed for below steps to work.
+Please make sure that docker is installed for below steps to work.
 
 Steps for docker build.
 ```bash
@@ -67,7 +67,7 @@ Please replace username, project-name, IMAGE_ID and VERSION with appropriate val
 This application can be hosted on kubernetes. 
 
 ### Prerequisites
-These softwares need to be installed on the host for deploying the application.
+These applications need to be installed on the host for deploying the application.
 - [Docker](https://www.docker.com/)
 - [kubernetes](https://kubernetes.io/)
 - [Prometheus](https://prometheus.io/)
