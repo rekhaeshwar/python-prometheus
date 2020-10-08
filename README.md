@@ -111,7 +111,7 @@ Each configuration purpose and expected values are described below:
   </tr>
  <tr>
     <td>query_interval_in_seconds</td>
-    <td>This config is to periodically run the function which querying urls after the mentioned seconds</td>
+    <td>This config is to periodically run the function which queryies urls after the mentioned seconds</td>
     <td>Integer</td>
     <td>300 (or as per need)</td>
   </tr>
