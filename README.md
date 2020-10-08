@@ -200,6 +200,8 @@ The pods running the application contain below annotations.
 ```
 So Prometheus(that's setup on the same k8s cluster) will start scraping metrics when the pods are created.
 
+
+
 ## Application Usage
 The application can be accessed at ```<application-url>/queryurl``` and the metrics can be accessed at ```<application-url>/metrics``` .
   
@@ -218,6 +220,8 @@ sample_external_url_up{url="https://httpstat.us/200"} 1.0
 ```
 
 ## Screenshot of metrics on Prometheus
-
+<img src="images/prometheus_up.png" />
+<img src="images/prometheus_response.png" />
 ## Screenshot of metrics on Grafana
+<img src="images/grafana.png" />
 
