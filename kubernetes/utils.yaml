@@ -12,3 +12,4 @@ kind: Secret
 metadata:
   name: git-reg-cred
   namespace: query-url
+type: kubernetes.io/dockerconfigjson
