@@ -96,7 +96,7 @@ Each configuration purpose and expected values are described below:
   <tr>
     <td>urls</td>
     <td>All the urls to be queried</td>
-    <td>List(containing urls)</td>
+    <td>List (containing urls)</td>
     <td><pre>[ 
   "https://httpstat.us/503" ,
   "https://httpstat.us/200"
