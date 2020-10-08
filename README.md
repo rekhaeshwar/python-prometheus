@@ -220,10 +220,13 @@ sample_external_url_up{url="https://httpstat.us/200"} 1.0
 ```
 
 ## Screenshot of metrics on Prometheus
+
 Queries used for both Prometheus and Grafana are ``` sum by (url) (sample_external_url_response_ms) ``` and ``` sum by (url) (sample_external_url_up)```
 
 <img src="images/prometheus_status.png" />
 <img src="images/prometheus_response.png" />
+
 ## Screenshot of metrics on Grafana
+
 <img src="images/grafana.png" />
 
