@@ -17,7 +17,7 @@
 - [Screenshot of Grafana](#screenshot-of-metrics-on-grafana)
 <!-- TOC END -->
 
-This project runs an application which queries status of specified urls and is written in Python.
+This project is an application which queries status of specified urls..
 
 ## Requirements
 
